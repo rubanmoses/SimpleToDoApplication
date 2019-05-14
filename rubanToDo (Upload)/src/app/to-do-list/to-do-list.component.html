@@ -1,0 +1,401 @@
+<html>
+<head>
+	<title>Google Icons</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div style="text-align:right;">
+    <!-- <h3>To Do List!</h3> -->
+    <br>
+  <label>Your Name?
+    <input #username />
+  </label>
+  <!-- <br> -->
+  <!-- (click) passes input value to add() and then clears the input -->
+  <!-- <br> -->
+  <button (click)="fetchInformation(username.value);" style='margin-right:16px'>
+    <i class="material-icons" style="font-size:20px">&#xe8b6;</i>
+  </button>
+  	<div style="text-align:center" *ngIf="flag && myTask.length !== 0">
+  		<h2 style="text-align:center">Want to add task?</h2>
+  		<label>Define Your task with one word!
+	    	<input #taskname />
+	  	</label>
+	  	<br>
+	  	<br/>
+	  	<label>Tell us more about your task
+	    	<input #taskDetails />
+	  	</label>
+	  	<br>
+	  	<br/>
+	  	<label>Which date?
+	  		<input type="date" #date>
+<!-- 	    	<input #date /> -->
+	  	</label>
+	  	<br>
+	  	<br/>
+		<button (click)="addTask(22, username.value, taskname.value, taskDetails.value, date.value);">
+    		<i class="material-icons">&#xe03c;</i> Add Task
+  		</button>
+  		<button (click)="addTodayTask(22, username.value, taskname.value, taskDetails.value, date.value);">
+    		<i class="material-icons">&#xe03c;</i> Today's Task
+  		</button>
+  		<br/>
+  		<br>
+  		<strong>Sort By?</strong>
+  		<br/>
+  		<!-- <select name="aa" onchange="report(this.value)"> 
+  <option value="">Please select</option>
+  <option value="daily">daily</option>
+  <option value="monthly">monthly</option>
+</select> -->
+<!-- <select (change)="onChange($event.target.value)">
+    <option *ngFor="let i of devices">{{i}}</option>
+</select>
+
+onChange(deviceValue) {
+    console.log(deviceValue);
+} -->
+  		<select id="id" (change)="callFunctionByNumber($event.target.value,username.value)">
+  			<option value=0>None</option>
+	  		<option value=1>TaskName Ascending</option>
+			<option value=2>TaskName Descending</option>
+			<option value=3>Date Ascending</option>
+			<option value=4>Date Descending</option>
+		</select>
+  		<!-- <button (click)="fetchInformationByTaskNameAscending(username.value);">
+    		TaskName Ascending
+  		</button>
+  		<button (click)="fetchInformationByTaskNameDescending(username.value);">
+    		TaskName Descending
+ 		</button>
+ 		<button (click)="fetchInformationByDateAscending(username.value);">
+    		Date Ascending
+ 		</button>
+ 		<button (click)="fetchInformationByDateDecending(username.value);">
+    		Date Descending
+ 		</button> -->
+ 		<br>
+ 	<br>
+  		<strong>View</strong>
+  	<br/>
+  		<button (click)="fetchInformation(username.value);">
+    		<i class="material-icons">&#xe896;</i> All Tasks
+ 		</button>
+ 		<button (click)="fetchTodayTask(username.value);">
+    		<i class="material-icons">&#xe85f;</i> Today's Tasks
+ 		</button>
+ 		<button (click)="fetchCompletedTask(username.value);">
+    		<i class="material-icons">&#xe8dc;</i> Completed Tasks
+ 		</button>
+ 		<button (click)="fetchIncompleteTask(username.value);">
+    		<i class="material-icons">&#xe8db;</i> Incomplete Tasks
+ 		</button>
+ 		<button (click)="myAssignedTask(username.value);">
+    		<i class="material-icons">&#xe03b;</i> Tasks Assigned To Others
+ 		</button>
+ 		<!-- <button (click)="tasksAssignedToMe(username.value);">
+    		<i class="material-icons">&#xe8ae;</i> Tasks Assigned To Me
+ 		</button> -->
+ 		<br>
+		<br/>
+ 		<button (click)="updateBooleanFlage3();">
+    		<i class="material-icons">&#xe80d;</i> Share?
+ 		</button>
+ 		
+	</div>
+	<!-- <div style="text-align:center"> -->
+		
+	<!-- </div> -->
+</div>
+
+<div style="text-align:center" *ngIf="flag3">
+	<br>
+	<br/>
+	<label>To -
+	    <input #to />
+	</label>
+	<br>
+	<br/>
+ 	<select #optionV >
+ 		<!-- <option [value]="user" *ngFor="let user of userNameArray">{{user|uppercase}}</option> -->
+   		<option [value]="user.name" *ngFor="let user of userNameArray">{{user.name|uppercase}}</option>
+ 	</select>
+	<br>
+	<br/>
+	<label>Task Name - 
+	    <input #taskN />
+	</label>
+	<br>
+	<br/>
+	<label>Task Details - 
+	    <input #taskD />
+	</label>
+	<br>
+	<br/>
+	<button (click)="addAssignment(1, username.value, optionV.value, taskN.value, taskD.value);">
+    		Send <i class="material-icons">&#xe163;</i>
+ 	</button>
+ 	<div style="text-align:center" *ngIf="flag6">
+ 		<i class="material-icons" style="font-size:48px;color:green">&#xe877;</i>
+ 	</div>
+
+</div>
+<!-- <div *ngIf="flag && size === 0"> -->
+<div *ngIf="myTask.length === 0 && flag">
+	<h2>Record Not found</h2>
+	<h3>New to Task Manager Application? click below</h3>
+	<br>
+	<button (click)="updateBooleanFlage2();">
+    	<i class="material-icons">&#xe853;</i> New User? 
+ 	</button>
+ 	<br>
+ 	<div *ngIf="flag2">
+ 		<!-- <h1>Hello World!</h1> -->
+ 		<br/>
+ 		<br>
+ 		<label>Your Name?
+    		<input #username />
+  		</label>
+  		<br>
+  		<br/>
+  		<label>Define Your task with one word!
+	    	<input #taskname />
+	  	</label>
+	  	<br>
+	  	<br/>
+	  	<label>Tell us more about your task
+	    	<input #taskDetails />
+	  	</label>
+	  	<br>
+	  	<br/>
+	  	<label>Which date?
+	    	<input type="date" #date />
+	  	</label>
+	  	<br>
+	  	<br/>
+		<button (click)="addTask(22, username.value, taskname.value, taskDetails.value, date.value);">
+    		<i class="material-icons">&#xe8a6;</i> Register
+  		</button>
+  		<button (click)="addTodayTask(22, username.value, taskname.value, taskDetails.value, date.value);">
+    		<i class="material-icons">&#xe8a6;</i> Register with Today's Task
+  		</button>
+  		<br>		
+ 	</div>
+</div>
+<!-- <button (click)="fetchInformationByTaskNameDescending(username.value);">
+    		Sort By TaskName Descending
+ </button> -->
+<!-- 	<br/>
+	<h4>Sort By?</h4>
+	<br/>
+  	<button (click)="fetchInformationByTaskNameAscending(username.value);">
+    		Sort By TaskName Ascending
+  	</button> -->
+<br>
+<div style="text-align:center" *ngIf="flag && myTask.length !== 0 && !flag4 && !flag5">
+	<!-- <button (click)="fetchInformation(username.value)"><i class="material-icons">&#xe5d5;</i></button> -->
+	<br>
+	<br>
+	<h2 style="text-align:center">List of all your tasks!</h2>
+	<ul>
+		<!-- <table>
+			<tr> -->
+				<!-- <th><h3>|Id|</h3></th> -->
+				<!-- <th>Delete</th>
+				<th>Edit</th>
+				<th>Task Name</th>
+				<th>Task Details</th>
+				<th>Date</th>
+				<th>Status</th>
+				<th>Task Complete</th>
+				<th>Task InComplete</th>
+				
+			</tr>
+		</table> -->
+	  <li *ngFor="let task of myTask">
+	            <!-- <span>Id - {{task.id}} </span> 
+	            Task Name - {{task.taskname}}
+	            Task Details - {{task.taskDetails}}
+	            Date - {{task.date}}
+	            Status - {{task.status}} -->
+	            <table style="width:75%">
+				 <!--  <tr> -->
+				    <!-- <th><h3>|Id|</h3></th> -->
+				   <!--  <th><h3>|Task Name|</h3></th>
+				    <th><h3>|Task Details|</h3></th>
+				    <th><h3>|Date|</h3></th>
+				    <th><h3>|Status|</h3></th>
+				    <th></th>
+				  </tr> -->
+				  <tr>
+				    <!-- <td>{{task.id}}</td> -->
+				    <td><button (click)="displayAlertMessage(); delete(task);"><i class="material-icons">&#xe872;</i></button></td>
+				    <td><button routerLink="/edit/{{task.id}}"><i class="material-icons">&#xe3c9;</i></button></td>
+				    <!-- <a routerLink="/edit/{{task.id}}"> -->
+					    <td>{{task.taskname}}</td>
+					    <td>{{task.taskDetails}}</td>
+					    <td>{{task.date}}</td>
+					    <td>{{task.status}}</td>
+				    <!-- </a> -->
+				    <!-- Task Completed -->
+				    <!-- <td><button (click)="statusUpdater(task)"><i class="material-icons">&#xe2bf;</i></button></td> -->
+				    <td><button (click)="statusUpdater(task)"><i class="material-icons">&#xe52d;</i></button></td>
+				    <!-- <td><button (click)="statusUpdater(task)"><i>&#xe166;</i></button></td> -->
+				    <td><button (click)="statusUpdaterIncomplete(task)"><i class="material-icons">&#xe860;</i></button></td>
+				  </tr>
+				</table>
+	      <!-- <button (click)="statusUpdater(task)">Task Completed!</button> -->
+	  </li>
+	</ul>
+</div>
+
+<!-- <div *ngIf="myTask.length === 0 && flag">
+	<h2>Record Not found</h2>
+	<h3>New to Task Manager Application? click below</h3>
+	<br>
+	<button (click)="updateBooleanFlage2();">
+    	<i class="material-icons">&#xe853;</i> New User? 
+ 	</button>
+ 	<br>
+ 	<div *ngIf="flag2"> -->
+ 		<!-- <h1>Hello World!</h1> -->
+ 		<!-- <br/>
+ 		<br>
+ 		<label>Your Name?
+    		<input #username />
+  		</label>
+  		<br>
+  		<br/>
+  		<label>Define Your task with one word!
+	    	<input #taskname />
+	  	</label>
+	  	<br>
+	  	<br/>
+	  	<label>Tell us more about your task
+	    	<input #taskDetails />
+	  	</label>
+	  	<br>
+	  	<br/>
+	  	<label>Which date?
+	    	<input type="date" #date />
+	  	</label>
+	  	<br>
+	  	<br/>
+		<button (click)="addTask(22, username.value, taskname.value, taskDetails.value, date.value);">
+    		<i class="material-icons">&#xe8a6;</i> Register
+  		</button>
+  		<button (click)="addTodayTask(22, username.value, taskname.value, taskDetails.value, date.value);">
+    		<i class="material-icons">&#xe8a6;</i> Register with Today's Task
+  		</button>
+  		<br>		
+ 	</div>
+</div> -->
+<!-- <button (click)="fetchInformationByTaskNameDescending(username.value);">
+    		Sort By TaskName Descending
+ </button> -->
+<!-- 	<br/>
+	<h4>Sort By?</h4>
+	<br/>
+  	<button (click)="fetchInformationByTaskNameAscending(username.value);">
+    		Sort By TaskName Ascending
+  	</button> -->
+<br>
+<div style="text-align:center" *ngIf="flag4">   <!-- && myTask.length !== 0 -->
+	<!-- <button (click)="fetchInformation(username.value)"><i class="material-icons">&#xe5d5;</i></button> -->
+	<br>
+	<br>
+	<h2 style="text-align:center">List of all Assigned Tasks!</h2>
+	<ul>
+		<table style="width:75%">
+			<tr>
+				<!-- <th><h3>|Id|</h3></th> -->
+				<th>Delete</th>
+				<th>Assigned To</th>
+				<th>Task Name</th>
+				<th>Task Details</th>
+				<th>Status</th>
+			</tr>
+		</table>
+	  <li *ngFor="let t of myAssign">
+	  			<table style="width:75%">
+				  <tr>
+				   <!--  <td><button (click)="displayAlertMessage(); delete(task);"><i class="material-icons">&#xe16c;</i></button></td> -->
+				   <td><button (click)="displayAlertMessage(); deleteAssignment(t);"><i class="material-icons">&#xe872;</i></button></td>
+					    <td>{{t.touser}}</td>
+					    <td>{{t.task}}</td>
+					    <td>{{t.taskDetails}}</td>
+					    <td>{{t.status}}</td>
+					    <!-- <td><button routerLink="/edit/{{task.id}}"><i class="material-icons">&#xe3c9;</i></button></td>
+					    <td><button (click)="statusUpdater(task)"><i class="material-icons">&#xe52d;</i></button></td> -->
+					    <!-- <td><button (click)="statusUpdater(task)"><i>&#xe166;</i></button></td> -->
+					    <!-- <td><button (click)="statusUpdaterIncomplete(task)"><i class="material-icons">&#xe860;</i></button></td> -->
+				  </tr>
+				</table>
+	      <!-- <button (click)="statusUpdater(task)">Task Completed!</button> -->
+	  </li>
+	</ul>
+</div>
+
+<div style="text-align:center" *ngIf="flag5">   <!-- && myTask.length !== 0 -->
+	<!-- <button (click)="fetchInformation(username.value)"><i class="material-icons">&#xe5d5;</i></button> -->
+	<br>
+	<br>
+	<h2 style="text-align:center">List of tasks Assigned to Me</h2>
+	<ul>
+		<table style="width:75%">
+			<tr>
+				<!-- <th><h3>|Id|</h3></th> -->
+				<th>Delete</th>
+				<th>Assigned From</th>
+				<th>Task Name</th>
+				<th>Task Details</th>
+				<th>Status</th>
+				<th>Task Accepted</th>
+				<th>Task Declined</th>
+				
+			</tr>
+		</table>
+	  <li *ngFor="let t of myAssign">
+	  			<table style="width:75%">
+				  <tr>
+				   <!--  <td><button (click)="displayAlertMessage(); delete(task);"><i class="material-icons">&#xe16c;</i></button></td> -->
+				   		<td><button (click)="displayAlertMessage(); deleteAssignment(t);"><i class="material-icons">&#xe872;</i></button></td>
+					    <td>{{t.fromuser}}</td>
+					    <td>{{t.task}}</td>
+					    <td>{{t.taskDetails}}</td>
+					    <td>{{t.status}}</td>
+					    <td><button (click)="acceptTask(t)"><i class="material-icons">&#xe5ca;</i></button></td>
+					    <td><button (click)="declineTask(t)"><i class="material-icons">&#xe5c9;</i></button></td>
+					    <!-- <td><button routerLink="/edit/{{task.id}}"><i class="material-icons">&#xe3c9;</i></button></td>
+					    <td><button (click)="statusUpdater(task)"><i class="material-icons">&#xe52d;</i></button></td> -->
+					    <!-- <td><button (click)="statusUpdater(task)"><i>&#xe166;</i></button></td> -->
+					    <!-- <td><button (click)="statusUpdaterIncomplete(task)"><i class="material-icons">&#xe860;</i></button></td> -->
+				  </tr>
+				</table>
+	      <!-- <button (click)="statusUpdater(task)">Task Completed!</button> -->
+	  </li>
+	</ul>
+</div>
+
+
+
+<!-- <table>
+  <tr>
+    <th><h5>Id</h5></th>
+    <th><h5>Task Name</h5></th>
+    <th><h5>Task Details</h5></th>
+    <th><h5>Date</h5></th>
+    <th><h5>Status</h5></th>
+  </tr>
+  <tr>
+    <td>{{task.id}}</td>
+    <td>{{task.taskname}}</td>
+    <td>{{task.taskDetails}}</td>
+    <td>{{task.date}}</td>
+    <td>{{task.status}}</td>
+  </tr>
+</table> -->
+</body>
+</html>

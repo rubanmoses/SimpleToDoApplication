@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: ToDoApplication
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Ruban
+Implementation-Vendor-Id: com.Ruban
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/ToDoApplication
+Created-By: Maven Integration for Eclipse
+

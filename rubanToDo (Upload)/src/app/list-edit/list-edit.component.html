@@ -1,0 +1,13 @@
+<div *ngIf="task">
+  <div><span>Task Name </span>{{task.name}}</div>
+  <div>
+    <label> TaskName :
+       <input [(ngModel)]="task.taskname" placeholder="Enter taskname"/>
+        Task Details : 
+        <input [(ngModel)]="task.taskDetails" placeholder="Enter task Details"/>
+        Task Date : 
+        <input [(ngModel)]="task.date" placeholder="Date?"/>
+      <button (click)="save()">Save Changes</button>
+    </label>
+  </div>
+</div>
